@@ -16,8 +16,8 @@ const promisifedQuery = promisify (connection.query).bind(connection);
 
 const runQuery = async () =>{
 try{
-let data = await promisifedQuery ('count(*) as total users');
-return(data)
+let data = await promisifedQuery ("SELECT count(*) as total FROM users");
+return data
 }
 catch(error) {
     console.log(error.sqlMessage);
@@ -28,7 +28,7 @@ connection.end();
 
 const addEmail = async (email) => {
     try {
-        const queryStringAdd = `INSERT INTO users(email) VALUES ('${email}')`;
+        const queryStringAdd = `INSERT INTO users(email) VALUES('${email}')`;
         let data = await promisifedQuery (queryStringAdd);
         return(data)
     }
